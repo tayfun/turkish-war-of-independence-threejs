@@ -18,11 +18,13 @@ It plays through 13 chapters in about 2 minutes 50 seconds:
 12. The Treaty of Lausanne
 13. The Republic of Türkiye
 
+It runs in English or Turkish. The language follows the browser, and the EN / TR switch on the control bar changes it at any time (the choice is remembered). Add `#tr` or `#en` to the address to link straight to one language.
+
+Turn on sound with the speaker button to hear each chapter narrated in the chosen language over a quiet ambient bed. With sound on, each chapter slows down to the length of its narration, so the whole piece runs about five minutes.
+
 ## Run it
 
-Open `index.html` in a browser. Everything is in that one file; three.js (r160) and the fonts load from public CDNs, so you need a network connection.
-
-To serve it locally:
+Serve the folder and open it in a browser. three.js (r160) and the fonts load from public CDNs, so you need a network connection. The narration is in `audio/`; browsers will not load it when `index.html` is opened straight from disk, so use a local server:
 
 ```bash
 python3 -m http.server 8000
@@ -35,16 +37,18 @@ Then open <http://localhost:8000/>.
 - **Play / pause:** the gold button, or the space bar
 - **Jump to a chapter:** click it on the rail, or use the left and right arrow keys
 - **Look around:** drag to orbit, scroll to zoom, double-click to reset
+- **Sound:** the speaker button turns narration and ambience on or off (browsers only allow sound after a click)
+- **Language:** the EN / TR buttons
 
 ## How it is built
 
 - The coastlines and borders come from Natural Earth (via the `world-atlas` package), embedded in the page as compact JSON.
 - The terrain is stylised, not surveyed: elevation is generated from a hand-placed model of the main ranges plus noise, so mountains are in the right places but individual valleys are not real.
 - Occupation zones, front lines and the Sèvres partition are approximate shapes drawn for clarity.
+- The narration (`audio/en-NN.mp3`, `audio/tr-NN.mp3`, one file per chapter and language) was generated with ElevenLabs text-to-speech from the chapter text. The ambient bed (drone, wind, distant guns) is synthesised in the browser with the Web Audio API.
 - The border lit at the end is the one recognised at Lausanne, so Hatay (which joined in 1939) is left outside it.
 
 ## Known limits
 
 - Close-up terrain is soft at the lowest camera angles.
 - The phone layout works, but the widest shots crop the far west and east.
-- There is no audio.

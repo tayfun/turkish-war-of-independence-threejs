@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="A three.js animation on a 3D relief map of Anatolia that follows the Turkish War of Independence, 1918–1923.">
+<meta name="description" content="A three.js animation on a 3D relief map of Anatolia that follows the Turkish War of Independence, 1918–1923. English and Turkish, with narration.">
 <title>Turkish War of Independence</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <style>
@@ -69,7 +69,7 @@ body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--f-body)
 @keyframes hintOut{to{opacity:0}}
 
 /* legend: one row above the rail, changes with the chapter */
-.legend{position:absolute;right:var(--gut-r);left:calc(var(--gut-l) + 440px);bottom:calc(var(--rail-h) + 12px);display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 20px;pointer-events:none}
+.legend{position:absolute;right:var(--gut-r);left:calc(var(--gut-l) + 430px);bottom:calc(var(--rail-h) + 12px);display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 20px;pointer-events:none}
 .legend span{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 var(--f-label);letter-spacing:.09em;color:var(--body);text-shadow:0 1px 3px rgba(0,0,0,.9)}
 .legend svg{display:block;width:28px;height:12px;flex:none}
 .legend .sw{width:22px;height:11px;flex:none;border:1px solid var(--c);background:repeating-linear-gradient(135deg,var(--c) 0 2.5px,rgba(0,0,0,.25) 2.5px 5px)}
@@ -96,6 +96,14 @@ body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--f-body)
 .ctl{display:flex;gap:6px;align-items:center;padding-bottom:13px}
 .ctl button{width:38px;height:38px;display:grid;place-items:center;padding:0;border:1px solid var(--hair);background:rgba(10,15,21,.7);color:var(--paper);cursor:pointer}
 .ctl button.play{width:46px;height:46px;border-color:var(--gold);color:var(--gold)}
+.ctl button.snd{margin-left:8px}
+.ctl button.snd.invite{border-color:var(--gold);color:var(--gold);animation:invite 2.2s ease-in-out infinite}
+.ctl button.snd.on{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+@keyframes invite{0%,100%{box-shadow:0 0 0 0 rgba(233,189,98,.55)}60%{box-shadow:0 0 0 9px rgba(233,189,98,0)}}
+.ctl .lang{display:flex}
+.ctl .lang button{width:32px;font:600 12.5px/1 var(--f-label);letter-spacing:.1em}
+.ctl .lang button+button{border-left:0}
+.ctl .lang button.on{background:var(--paper);border-color:var(--paper);color:var(--ink)}
 .ctl button:hover{background:rgba(239,231,214,.12)}
 .ctl svg{width:16px;height:16px;fill:currentColor}
 .segs{flex:1;min-width:0;display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:5px;align-items:end}
@@ -112,7 +120,7 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 #load.off{opacity:0;pointer-events:none}
 
 @media (max-width:820px){
-  :root{--rail-h:64px;--gut-l:max(16px,env(safe-area-inset-left,0px));--gut-r:max(16px,env(safe-area-inset-right,0px))}
+  :root{--rail-h:98px;--gut-l:max(16px,env(safe-area-inset-left,0px));--gut-r:max(16px,env(safe-area-inset-right,0px))}
   .legend{display:none}
   .mast{padding-top:14px} .mast .k{font-size:10px} .mast h1{font-size:14px;max-width:10em}
   .clock .aux{display:none} .lb.ban{top:92px;padding:12px 30px 16px;width:max-content;max-width:92vw}
@@ -120,12 +128,12 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   .card{bottom:calc(var(--rail-h) + 8px);padding:13px 15px 14px}
   .card .date{margin-top:9px;font-size:13px} .card h2{font-size:21px;margin:5px 0 7px}
   .card p{font-size:13.5px;line-height:1.44} .card blockquote{display:none}
-  .rail{gap:10px} .ctl{padding-bottom:4px} .ctl button{width:34px;height:34px} .ctl button.play{width:40px;height:40px}
-  .segs{gap:3px;padding-bottom:20px} .seg{padding-top:0} .seg .yr,.seg .nm{display:none} .seg .bar{height:5px}
+  .rail{flex-direction:column;align-items:stretch;gap:8px} .ctl{padding-bottom:0;justify-content:center} .ctl button{width:36px;height:36px} .ctl button.play{width:42px;height:42px}
+  .segs{gap:3px;padding-bottom:6px;flex:none} .seg{padding-top:0} .seg .yr,.seg .nm{display:none} .seg .bar{height:5px}
   .lb.ev b{font-size:12px} .lb.ev span{font-size:11.5px} .lb.city{font-size:10.5px} .lb.city.major{font-size:12px}
 }
 @media (max-width:1080px){.legend{display:none}}
-@media (prefers-reduced-motion:reduce){.card .in{animation:none}}
+@media (prefers-reduced-motion:reduce){.card .in{animation:none}.ctl button.snd.invite{animation:none}}
 </style>
 
 </head>
@@ -136,14 +144,14 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
   <div id="labels"></div>
 
   <header class="mast">
-    <div class="k">KURTULUŞ SAVAŞI · 1919 – 1923</div>
-    <h1>The Turkish War of Independence</h1>
+    <div class="k" id="hK">KURTULUŞ SAVAŞI · 1919 – 1923</div>
+    <h1 id="hT">The Turkish War of Independence</h1>
   </header>
 
   <div class="clock" aria-live="off">
-    <div class="t">DATE ON THE MAP</div>
+    <div class="t" id="hD">DATE ON THE MAP</div>
     <div class="d" id="clock">30 OCT <i>1918</i></div>
-    <div class="aux"><span>DRAG TO ORBIT · SCROLL TO ZOOM</span><svg viewBox="0 0 40 40" aria-label="North"><circle cx="20" cy="20" r="18.5" fill="rgba(10,15,21,.6)" stroke="rgba(239,231,214,.3)"/><g id="north"><path d="M20 4.5l4.6 15.5h-9.2z" fill="#e4352b"/><path d="M20 35.5l4.6-15.5h-9.2z" fill="rgba(239,231,214,.55)"/><text x="20" y="13.5" text-anchor="middle" font-size="0" fill="#fff">N</text></g><text x="20" y="23.4" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="600" font-size="10" fill="#0b1016">N</text></svg></div>
+    <div class="aux"><span id="hH">DRAG TO ORBIT · SCROLL TO ZOOM</span><svg viewBox="0 0 40 40" aria-label="North"><circle cx="20" cy="20" r="18.5" fill="rgba(10,15,21,.6)" stroke="rgba(239,231,214,.3)"/><g id="north"><path d="M20 4.5l4.6 15.5h-9.2z" fill="#e4352b"/><path d="M20 35.5l4.6-15.5h-9.2z" fill="rgba(239,231,214,.55)"/><text x="20" y="13.5" text-anchor="middle" font-size="0" fill="#fff">N</text></g><text x="20" y="23.4" text-anchor="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="600" font-size="10" fill="#0b1016" id="hN">N</text></svg></div>
   </div>
 
   <aside class="legend" id="legend" aria-label="Map legend"></aside>
@@ -158,6 +166,8 @@ button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
       <button id="bPrev" aria-label="Previous chapter"><svg viewBox="0 0 16 16"><path d="M3 2h2v12H3zM14 2v12L6 8z"/></svg></button>
       <button id="bPlay" class="play" aria-label="Pause"><svg viewBox="0 0 16 16"><path id="iPlay" d="M3 2h4v12H3zM9 2h4v12H9z"/></svg></button>
       <button id="bNext" aria-label="Next chapter"><svg viewBox="0 0 16 16"><path d="M11 2h2v12h-2zM2 2l8 6-8 6z"/></svg></button>
+      <button id="bSound" class="snd invite" aria-label="Turn sound on" aria-pressed="false"><svg viewBox="0 0 16 16"><path d="M1.5 6h3l4-3.2v10.4l-4-3.2h-3z"/><path id="iSnd" d="M10.6 5.6l4 4.8M14.6 5.6l-4 4.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+      <div class="lang" role="group" aria-label="Language"><button id="lEn" lang="en" aria-label="English">EN</button><button id="lTr" lang="tr" aria-label="Türkçe">TR</button></div>
     </div>
     <div class="segs" id="segs"></div>
   </nav>
@@ -191,6 +201,13 @@ const back=t=>{t=clamp(t);const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c
 const hash=(i,j)=>{let n=Math.imul(i|0,374761393)+Math.imul(j|0,668265263)|0;n=Math.imul(n^(n>>>13),1274126177);return ((n^(n>>>16))>>>0)/4294967295;};
 // piecewise track: [t0,v0,t1,v1,...] smooth between keys
 const tr=(T,k)=>{if(T<=k[0])return k[1];for(let i=2;i<k.length;i+=2){if(T<=k[i]){const a=k[i-2],b=k[i];return lerp(k[i-1],k[i+1],sstep(a,b,T));}}return k[k.length-1];};
+
+/* ───────────── language ───────────── */
+const TRD={"ARMISTICE OF MUDROS": "MONDROS MÜTAREKESİ", "30 Oct 1918": "30 Eki 1918", "FIRST ARMED RESISTANCE": "İLK SİLAHLI DİRENİŞ", "Kuva-yi Milliye · Ayvalık and Aydın, from May 1919": "Kuva-yi Milliye · Ayvalık ve Aydın, Mayıs 1919’dan itibaren", "GREEK LANDING AT İZMİR": "YUNAN ORDUSU İZMİR’E ÇIKIYOR", "15 May 1919": "15 Mayıs 1919", "LANDING AT SAMSUN": "SAMSUN’A ÇIKIŞ", "19 May 1919": "19 Mayıs 1919", "AMASYA CIRCULAR": "AMASYA GENELGESİ", "22 June 1919": "22 Haziran 1919", "ERZURUM CONGRESS": "ERZURUM KONGRESİ", "23 Jul – 7 Aug 1919": "23 Tem – 7 Ağu 1919", "SİVAS CONGRESS": "SİVAS KONGRESİ", "4 – 11 Sep 1919": "4 – 11 Eyl 1919", "ARRIVAL IN ANKARA": "ANKARA’YA VARIŞ", "27 Dec 1919": "27 Ara 1919", "NATIONAL PACT": "MİSAK-I MİLLÎ", "Misak-ı Millî · İstanbul, 28 January 1920": "Mebusan Meclisi · İstanbul, 28 Ocak 1920", "MARAŞ RISES": "MARAŞ SAVUNMASI", "21 Jan – 12 Feb 1920 · the French withdraw": "21 Oca – 12 Şub 1920 · Fransızlar çekiliyor", "URFA RISES": "URFA SAVUNMASI", "from 9 Feb 1920 · the French leave in April": "9 Şub 1920’den itibaren · Fransızlar nisanda çekiliyor", "SIEGE OF ANTEP": "ANTEP KUŞATMASI", "from April 1920 · the city falls in Feb 1921": "Nisan 1920’den itibaren · şehir Şubat 1921’de düşüyor", "İSTANBUL OCCUPIED": "İSTANBUL’UN İŞGALİ", "16 March 1920 · parliament closed": "16 Mart 1920 · Meclis dağıtıldı", "GRAND NATIONAL ASSEMBLY": "BÜYÜK MİLLET MECLİSİ", "Ankara, 23 April 1920": "Ankara, 23 Nisan 1920", "GREEK SUMMER OFFENSIVE": "YUNAN YAZ TAARRUZU", "June – August 1920 · Bursa, Uşak, Eastern Thrace": "Haziran – Ağustos 1920 · Bursa, Uşak, Doğu Trakya", "ANKARA REJECTS THE TREATY": "ANKARA ANTLAŞMAYI REDDEDİYOR", "never ratified": "hiçbir zaman onaylanmadı", "KARS RETAKEN": "KARS GERİ ALINDI", "30 Oct 1920": "30 Eki 1920", "BORDER CONFIRMED": "SINIR KESİNLEŞTİ", "treaties of Moscow and Kars with the Soviets, 1921": "Sovyetlerle Moskova ve Kars antlaşmaları, 1921", "TREATY OF GÜMRÜ": "GÜMRÜ ANTLAŞMASI", "with Armenia, 3 Dec 1920": "Ermenistan ile, 3 Ara 1920", "FIRST İNÖNÜ": "BİRİNCİ İNÖNÜ", "6 – 11 Jan 1921": "6 – 11 Oca 1921", "SECOND İNÖNÜ": "İKİNCİ İNÖNÜ", "23 Mar – 1 Apr 1921": "23 Mar – 1 Nis 1921", "10 – 24 July 1921": "10 – 24 Temmuz 1921", "COMMANDER-IN-CHIEF": "BAŞKOMUTAN", "Mustafa Kemal, 5 August 1921": "Mustafa Kemal, 5 Ağustos 1921", "GAZİ AND MARSHAL": "GAZİ VE MAREŞAL", "title voted by the Assembly, 19 Sep 1921": "Meclis’in verdiği unvan, 19 Eyl 1921", "BATTLE OF SAKARYA": "SAKARYA MEYDAN MUHAREBESİ", "23 Aug – 13 Sep 1921": "23 Ağu – 13 Eyl 1921", "ANKARA AGREEMENT": "ANKARA ANTLAŞMASI", "20 Oct 1921 · France leaves Cilicia": "20 Eki 1921 · Fransa güneyden çekiliyor", "ITALY WITHDRAWS": "İTALYA ÇEKİLİYOR", "Antalya evacuated, July 1921": "Antalya boşaltıldı, Temmuz 1921", "Dawn, 26 August 1922": "Şafak, 26 Ağustos 1922", "30 Aug 1922 · the Greek main force is encircled": "30 Ağu 1922 · Yunan ana kuvvetleri kuşatıldı", "İZMİR LIBERATED": "İZMİR’İN KURTULUŞU", "9 September 1922": "9 Eylül 1922", "ÇANAKKALE STANDOFF": "ÇANAKKALE BUNALIMI", "British and Turkish troops face off, Sep – Oct 1922": "İngiliz ve Türk birlikleri karşı karşıya, Eyl – Eki 1922", "ARMISTICE OF MUDANYA": "MUDANYA MÜTAREKESİ", "11 Oct 1922": "11 Eki 1922", "SULTANATE ABOLISHED": "SALTANATIN KALDIRILMASI", "Ankara, 1 November 1922": "Ankara, 1 Kasım 1922", "LAST ALLIED TROOPS LEAVE": "SON İTİLAF BİRLİKLERİ AYRILIYOR", "İstanbul, 2 October 1923": "İstanbul, 2 Ekim 1923", "REPUBLIC PROCLAIMED": "CUMHURİYET’İN İLANI", "Ankara, 29 October 1923": "Ankara, 29 Ekim 1923", "ALLIED": "İTİLAF", "İstanbul & the Straits, British-led": "İstanbul ve Boğazlar, İngiliz önderliğinde", "BRITISH, THEN FRENCH": "ÖNCE İNGİLİZ, SONRA FRANSIZ", "Cilicia and the south": "Çukurova ve güney", "ITALIAN": "İTALYAN", "south-west Anatolia": "Güneybatı Anadolu", "FRENCH": "FRANSIZ", "occupation of Cilicia": "Çukurova ve güneyin işgali", "GREECE": "YUNANİSTAN", "STRAITS ZONE": "BOĞAZLAR BÖLGESİ", "ITALIAN SPHERE": "İTALYAN NÜFUZ BÖLGESİ", "FRENCH SPHERE": "FRANSIZ NÜFUZ BÖLGESİ", "ARMENIA": "ERMENİSTAN", "KURDISTAN": "KÜRDİSTAN", "autonomous": "özerk", "OTTOMAN STATE": "OSMANLI DEVLETİ", "what would remain": "geriye kalacak olan", "republic, 1918 – 1920": "cumhuriyet, 1918 – 1920", "EASTERN THRACE": "DOĞU TRAKYA", "returned without a battle": "savaşılmadan geri alındı", "SS BANDIRMA": "BANDIRMA VAPURU", "İstanbul to Samsun, 16 – 19 May 1919": "İstanbul’dan Samsun’a, 16 – 19 Mayıs 1919", "TREATY OF LAUSANNE": "LOZAN ANTLAŞMASI", "24 JULY 1923": "24 TEMMUZ 1923", "29 OCTOBER 1923": "29 EKİM 1923", "Turkish national forces": "Türk millî kuvvetleri", "Greek army": "Yunan ordusu", "Army units, Turkish and Greek": "Ordu birlikleri, Türk ve Yunan", "Turkish defensive line": "Türk savunma hattı", "Greek occupation": "Yunan işgali", "Allied occupation, British-led": "İtilaf işgali, İngiliz önderliğinde", "French occupation": "Fransız işgali", "Italian occupation": "İtalyan işgali", "Mustafa Kemal’s route": "Mustafa Kemal’in güzergâhı", "Political milestone": "Siyasi dönüm noktası", "Fighting": "Çatışma", "Railway": "Demiryolu", "Greece": "Yunanistan", "Straits zone": "Boğazlar bölgesi", "Italian sphere": "İtalyan nüfuz bölgesi", "French sphere": "Fransız nüfuz bölgesi", "Armenia": "Ermenistan", "Kurdistan": "Kürdistan", "Borders recognised at Lausanne": "Lozan’da tanınan sınırlar", "Front line falling back": "Geri çekilen cephe hattı", "Kuva-yi Milliye militia": "Kuva-yi Milliye birlikleri", "Turkish units": "Türk birlikleri", "Course of the Bandırma": "Bandırma vapurunun rotası", "Deputies travelling to Ankara": "Ankara’ya gelen mebuslar", "KURTULUŞ SAVAŞI · 1919 – 1923": "MİLLÎ MÜCADELE · 1919 – 1923", "The Turkish War of Independence": "Türk Kurtuluş Savaşı", "Turkish War of Independence": "Türk Kurtuluş Savaşı", "DATE ON THE MAP": "HARİTADAKİ TARİH", "DRAG TO ORBIT · SCROLL TO ZOOM": "SÜRÜKLE: DÖNDÜR · KAYDIR: YAKINLAŞTIR", "Pause": "Duraklat", "Play": "Oynat", "Replay": "Yeniden oynat", "Previous chapter": "Önceki bölüm", "Next chapter": "Sonraki bölüm", "Turn sound on": "Sesi aç", "Turn sound off": "Sesi kapat", "Chapter": "Bölüm", "CHAPTER": "BÖLÜM", "Language": "Dil", "Map legend": "Harita lejantı", "Chapters": "Bölümler", "BLACK SEA": "KARADENİZ", "MEDITERRANEAN SEA": "AKDENİZ", "AEGEAN SEA": "EGE DENİZİ", "Sea of Marmara": "Marmara Denizi", "CYPRUS": "KIBRIS", "BULGARIA": "BULGARİSTAN", "SYRIA": "SURİYE", "IRAQ": "IRAK", "PERSIA": "İRAN", "CAUCASUS": "KAFKASYA", "A N A T O L I A": "A N A D O L U", "Euphrates": "Fırat", "Tigris": "Dicle", "Lake Van": "Van Gölü", "N": "K", "DAY": "GÜN", "22 DAYS · ADVANCE BROKEN": "22 GÜN · İLERLEYİŞ DURDURULDU"};
+let LANG=((navigator.languages&&navigator.languages[0])||navigator.language||'').toLowerCase().startsWith('tr')?'tr':'en';
+try{const q=localStorage.getItem('twi-lang');if(q==='tr'||q==='en')LANG=q;}catch(e){}
+if(location.hash==='#tr'||location.hash==='#en')LANG=location.hash.slice(1);
+const tt=x=>LANG==='tr'&&TRD[x]!=null?TRD[x]:x;
 
 /* ───────────── projection ───────────── */
 const LON0=23.5,LON1=46.5,LAT0=34.3,LAT1=43.7,LONC=35,LATC=39,S=8,KX=Math.cos(LATC*Math.PI/180)*S;
@@ -344,8 +361,11 @@ const tex=(function paint(){
   layer(x=>{x.strokeStyle='rgba(12,26,34,.85)';x.lineWidth=1.7*K;ringPath(x,ALL,TW,TH);x.stroke();
     },'destination-in');
   ctx.strokeStyle='rgba(22,56,72,.6)';ctx.lineWidth=1.3*K;ringPath(ctx,LAKES,TW,TH);ctx.stroke();
-  // lettering
-  const spaced=(t,lon,lat,size,sp,rot,fill,font)=>{ctx.save();ctx.translate(lx(lon,TW),ly(lat,TH));ctx.rotate((rot||0)*Math.PI/180);ctx.font=(font||'italic 600 ')+size*K+'px Georgia,"Times New Roman",serif';ctx.fillStyle=fill;ctx.textBaseline='middle';
+  const base=mkCanvas(TW,TH);base.getContext('2d').drawImage(c,0,0);
+  const t=new THREE.CanvasTexture(c);t.flipY=false;t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer.capabilities.getMaxAnisotropy();t.generateMipmaps=true;t.minFilter=THREE.LinearMipmapLinearFilter;
+  // lettering (redrawn when the language changes)
+  t.userData.letter=()=>{ctx.setLineDash([]);ctx.textAlign='left';ctx.drawImage(base,0,0);
+  const spaced=(t,lon,lat,size,sp,rot,fill,font)=>{ctx.save();ctx.translate(lx(lon,TW),ly(lat,TH));ctx.rotate((rot||0)*Math.PI/180);t=tt(t);if(LANG==='tr')t=t.replace('°E','°D').replace('°N','°K');ctx.textAlign='left';ctx.font=(font||'italic 600 ')+size*K+'px Georgia,"Times New Roman",serif';ctx.fillStyle=fill;ctx.textBaseline='middle';
     let w=0;const ws=[...t].map(ch=>{const m=ctx.measureText(ch).width+sp*K;w+=m;return m;});let x=-w/2;[...t].forEach((ch,i)=>{ctx.fillText(ch,x,0);x+=ws[i];});ctx.restore();};
   const SEA='rgba(170,208,214,.5)',LAND='rgba(40,30,20,.36)';
   spaced('BLACK SEA',34.4,43.14,30,26,0,SEA);spaced('MEDITERRANEAN SEA',30.7,35.6,27,13,0,SEA);spaced('AEGEAN SEA',25.25,38.6,22,13,-72,SEA);
@@ -360,11 +380,11 @@ const tex=(function paint(){
   ctx.save();ctx.translate(lx(40.25,TW),ly(42.72,TH));const cr=34*K;ctx.strokeStyle='rgba(190,220,224,.55)';ctx.fillStyle='rgba(190,220,224,.55)';ctx.lineWidth=1*K;
   ctx.beginPath();ctx.arc(0,0,cr*.72,0,7);ctx.stroke();
   for(let a=0;a<8;a++){const L=a%2?cr*.55:cr,w=cr*.11;ctx.save();ctx.rotate(a*Math.PI/4);ctx.beginPath();ctx.moveTo(0,-L);ctx.lineTo(w,0);ctx.lineTo(-w,0);ctx.closePath();a===0?ctx.fill():ctx.stroke();ctx.restore();}
-  ctx.font='600 '+13*K+'px Georgia,serif';ctx.textAlign='center';ctx.fillText('N',0,-cr-6*K);ctx.restore();
-  {const kmpx=(S/111.19)/MW*TW,x0=lx(37.55,TW),y0=ly(42.12,TH);ctx.strokeStyle=ctx.fillStyle='rgba(190,220,224,.6)';ctx.lineWidth=1*K;ctx.font='500 '+9.5*K+'px Georgia,serif';ctx.textAlign='center';
+  ctx.font='600 '+13*K+'px Georgia,serif';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillText(tt('N'),0,-cr-6*K);ctx.restore();
+  {const kmpx=(S/111.19)/MW*TW,x0=lx(37.55,TW),y0=ly(42.12,TH);ctx.strokeStyle=ctx.fillStyle='rgba(190,220,224,.6)';ctx.lineWidth=1*K;ctx.font='500 '+9.5*K+'px Georgia,serif';ctx.textAlign='center';ctx.textBaseline='alphabetic';
    for(let i=0;i<4;i++){ctx.beginPath();ctx.rect(x0+i*50*kmpx,y0,50*kmpx,4*K);i%2?ctx.stroke():ctx.fill();}
    [0,100,200].forEach(v=>ctx.fillText(v+(v===200?' km':''),x0+v*kmpx,y0-6*K));}
-  const t=new THREE.CanvasTexture(c);t.flipY=false;t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer.capabilities.getMaxAnisotropy();t.generateMipmaps=true;t.minFilter=THREE.LinearMipmapLinearFilter;return t;
+  t.needsUpdate=true;};t.userData.letter();return t;
 })();
 
 /* ───────────── zone masks ───────────── */
@@ -555,7 +575,8 @@ function pulse(lon,lat,color,t0,t1,maxR,period=1.5){
     m.visible=any=true;const s=maxR*(.06+.94*eout(ph));m.scale.set(s,s,1);m.material.opacity=Math.pow(1-ph,1.5)*.85;}g.visible=any;});
 }
 
-function flashes(anchors,n,t0,t1,o){
+const BATTLE=[];
+function flashes(anchors,n,t0,t1,o){BATTLE.push([t0,t1]);
   o=Object.assign({size:1.5,jit:1.2,rate:1.6,smoke:true},o);const g=new THREE.Group();fx.add(g);const fl=[],sm=[];
   for(let k=0;k<n;k++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:k%3?0xffe0a8:0xff8140,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false,transparent:true,fog:false,toneMapped:false}));s.renderOrder=9;g.add(s);fl.push(s);}
   if(o.smoke)for(let k=0;k<Math.ceil(n*.6);k++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:puffTex,color:0x4a4038,depthWrite:false,transparent:true,fog:false}));s.renderOrder=8;g.add(s);sm.push(s);}
@@ -605,37 +626,21 @@ function guns(list,ok){list.forEach(q=>{const g=buildGun();g.position.copy(P(q[0
 const D=[13,12,14,13.5,12,13.5,11.5,12,15.5,13,15,12,13],NC=D.length,C=[0];D.forEach(d=>C.push(C[C.length-1]+d));const END=C[NC];
 const at=(c,s)=>C[c]+s;
 const CH=[
- {key:'Mudros',yr:'1918',date:'30 October 1918 – 15 May 1919',title:'Armistice and occupation',d0:'1918-10-30',d1:'1919-05-15',
-  body:'Defeated in the First World War, the Ottoman Empire signs the Armistice of Mudros. Allied forces move in: a British-led fleet anchors off İstanbul and holds the Straits, British and then French troops occupy Cilicia and the south, the Italians land at Antalya. On 15 May 1919 a Greek army lands at İzmir, and the first militias take up arms.'},
- {key:'Samsun',yr:'1919',date:'19 May 1919',title:'The landing at Samsun',d0:'1919-05-16',d1:'1919-05-19',
-  body:'Mustafa Kemal Pasha leaves occupied İstanbul aboard the old steamer Bandırma, officially as an army inspector. Three days later he steps ashore at Samsun on the Black Sea. The national struggle begins here.'},
- {key:'Congresses',date:'June – September 1919',title:'Amasya, Erzurum, Sivas',d0:'1919-06-12',d1:'1919-12-27',
-  body:'The Amasya Circular calls on the nation to act for itself. Congresses at Erzurum and Sivas unite the local resistance societies into one movement and declare the homeland indivisible. In December its leaders settle in Ankara.',
-  quote:'The independence of the nation will be saved by the resolve and determination of the nation itself.',src:'Amasya Circular, 22 June 1919'},
- {key:'The South',yr:'1920',date:'January – April 1920',title:'The National Pact and the south',d0:'1920-01-21',d1:'1920-03-15',
-  body:'In İstanbul the last Ottoman parliament adopts the National Pact, Misak-ı Millî: the lands inside the armistice lines are one indivisible whole. In the south, local militias called Kuva-yi Milliye rise against the French occupation and force it out of Maraş and Urfa. Antep holds out for ten months before it falls.'},
- {key:'Assembly',date:'23 April 1920',title:'The Grand National Assembly',d0:'1920-03-16',d1:'1920-04-23',
-  body:'On 16 March 1920 the Allies formally occupy İstanbul and the Ottoman parliament is dissolved. Deputies from across the country gather in Ankara instead, and the Grand National Assembly elects Mustafa Kemal its president. The Sultan’s government sentences him to death in absentia and raises revolts against Ankara.'},
- {key:'Sèvres',date:'10 August 1920',title:'The Treaty of Sèvres',d0:'1920-06-22',d1:'1920-08-10',
-  body:'While the Greek army advances to Bursa, Uşak and Eastern Thrace, the Sultan’s government signs a treaty that carves up Anatolia: İzmir and Thrace to Greece, internationalised Straits, an Armenian state, an autonomous Kurdistan, and French and Italian spheres under a companion agreement. Ankara rejects it, and it is never ratified.'},
- {key:'East',date:'September – December 1920',title:'The eastern front',d0:'1920-09-28',d1:'1920-12-03',
-  body:'Kâzım Karabekir’s army advances against the Republic of Armenia and retakes Sarıkamış and Kars. The Treaty of Gümrü that follows is Ankara’s first international treaty. In 1921 the treaties of Moscow and Kars with the Soviets confirm this border, and Soviet arms and gold begin to arrive.'},
- {key:'İnönü',yr:'1921',date:'January – April 1921',title:'The battles of İnönü',d0:'1921-01-06',d1:'1921-04-01',
-  body:'The Greek army advances from Bursa along the railway toward Eskişehir. Ankara’s new regular army, which has replaced the irregular militias, is commanded by İsmet Pasha. It stops the advance twice at İnönü, the first victories of the Assembly’s own army.'},
- {key:'Sakarya',date:'23 August – 13 September 1921',title:'The Battle of Sakarya',d0:'1921-07-10',d1:'1921-10-20',
-  body:'After taking Kütahya and Eskişehir in July, the Greek army pushes to within 50 km of Ankara. The Assembly makes Mustafa Kemal commander-in-chief. For 22 days and nights the armies fight along a 100 km front on the Sakarya River, and the advance is broken. Italy has already left Antalya; France now makes peace with Ankara and leaves Cilicia.',
-  quote:'There is no line of defence, only a surface of defence. That surface is the whole homeland.',src:'Mustafa Kemal, 1921'},
- {key:'Great Offensive',yr:'1922',date:'26 August – 8 September 1922',title:'The Great Offensive',d0:'1922-08-26',d1:'1922-09-08',
-  body:'After a year of preparation, the Turkish army attacks at dawn from the heights of Kocatepe near Afyon. Within five days the Greek front collapses and its main force is encircled at Dumlupınar. The pursuit to the Aegean begins.',
-  quote:'Armies, your first objective is the Mediterranean. Forward!',src:'Order of the day, 1 September 1922'},
- {key:'İzmir',date:'9 September – 11 October 1922',title:'İzmir and Mudanya',d0:'1922-09-09',d1:'1922-10-11',
-  body:'Turkish cavalry enters İzmir fourteen days after the offensive began. Days later a great fire destroys much of the city. After a tense standoff with British troops at Çanakkale, the Armistice of Mudanya ends the fighting on 11 October, and Eastern Thrace is handed back without a battle.'},
- {key:'Lausanne',yr:'1923',date:'24 July 1923',title:'The Treaty of Lausanne',d0:'1922-11-01',d1:'1923-10-02',
-  body:'The Assembly abolishes the sultanate on 1 November 1922, and the last Sultan leaves İstanbul on a British warship. After eight months of negotiation, the Treaty of Lausanne replaces Sèvres and recognises the sovereignty and borders of the new state; only Mosul is left open. A separate convention sets a compulsory exchange of populations with Greece.'},
- {key:'Republic',date:'29 October 1923',title:'The Republic of Türkiye',d0:'1923-10-13',d1:'1923-10-29',
-  body:'Ankara becomes the capital on 13 October. Sixteen days later the Grand National Assembly proclaims the Republic and elects Mustafa Kemal, later named Atatürk, as its first president.',
-  quote:'Sovereignty belongs unconditionally to the nation.',src:'Constitution of 1921, Article 1'}
+ {"d1": "1919", "en": {"key": "Mudros", "date": "30 October 1918 – 15 May 1919", "title": "Armistice and occupation", "body": "October 1918. Defeated in the First World War, the Ottoman Empire signs the Armistice of Mudros. Allied forces move in: a British-led fleet at İstanbul, British and then French troops in the south, Italians at Antalya. In May 1919 a Greek army lands at İzmir, and the first militias take up arms."}, "tr": {"key": "Mondros", "date": "30 Ekim 1918 – 15 Mayıs 1919", "title": "Mütareke ve işgal", "body": "Ekim 1918. Birinci Dünya Savaşı’nda yenilen Osmanlı Devleti, Mondros Mütarekesi’ni imzalar. İtilaf kuvvetleri ülkeye girer: İngiliz önderliğindeki donanma İstanbul’a demirler, güneyi önce İngilizler, sonra Fransızlar, Antalya’yı İtalyanlar işgal eder. Mayıs 1919’da Yunan ordusu İzmir’e çıkar ve ilk Kuva-yi Milliye birlikleri silaha sarılır."}, "yr": "1918"},
+ {"d1": "1919", "en": {"key": "Samsun", "date": "19 May 1919", "title": "The landing at Samsun", "body": "Mustafa Kemal Pasha leaves occupied İstanbul aboard the old steamer Bandırma, officially as an army inspector. On 19 May 1919 he steps ashore at Samsun on the Black Sea. The national struggle begins here."}, "tr": {"key": "Samsun", "date": "19 Mayıs 1919", "title": "Samsun’a çıkış", "body": "Mustafa Kemal Paşa, işgal altındaki İstanbul’dan eski Bandırma vapuruyla, resmen ordu müfettişi olarak ayrılır. 19 Mayıs 1919’da Karadeniz kıyısındaki Samsun’a ayak basar. Millî Mücadele burada başlar."}, "yr": "1919"},
+ {"d1": "1919", "en": {"key": "Congresses", "date": "June – September 1919", "title": "Amasya, Erzurum, Sivas", "body": "The Amasya Circular calls on the nation to act for itself. Congresses at Erzurum and Sivas unite the local resistance societies into one movement and declare the homeland indivisible. In December its leaders settle in Ankara.", "quote": "The independence of the nation will be saved by the resolve and determination of the nation itself.", "src": "Amasya Circular, 22 June 1919"}, "tr": {"key": "Kongreler", "date": "Haziran – Eylül 1919", "title": "Amasya, Erzurum, Sivas", "body": "Amasya Genelgesi, milleti kendi kaderini eline almaya çağırır. Erzurum ve Sivas kongreleri yerel direniş cemiyetlerini tek bir hareket altında birleştirir ve vatanın bölünmez bir bütün olduğunu ilan eder. Aralık ayında hareketin önderleri Ankara’ya yerleşir.", "quote": "Milletin istiklalini yine milletin azim ve kararı kurtaracaktır.", "src": "Amasya Genelgesi, 22 Haziran 1919"}},
+ {"d1": "1920", "en": {"key": "The South", "date": "January – April 1920", "title": "The National Pact and the south", "body": "In January 1920 the last Ottoman parliament adopts the National Pact: the lands inside the armistice lines are one indivisible whole. In the south, militias called Kuva-yi Milliye rise against the French occupation and force it out of Maraş and Urfa. Antep holds out for ten months before it falls."}, "tr": {"key": "Güney", "date": "Ocak – Nisan 1920", "title": "Misak-ı Millî ve Güney Cephesi", "body": "Ocak 1920’de son Osmanlı Mebusan Meclisi Misak-ı Millî’yi kabul eder: mütareke sınırları içindeki topraklar bölünmez bir bütündür. Güneyde Kuva-yi Milliye, Fransız işgaline karşı ayaklanır ve Fransızları Maraş ile Urfa’dan çıkarır. Antep on ay direndikten sonra düşer."}, "yr": "1920"},
+ {"d1": "1920", "en": {"key": "Assembly", "date": "23 April 1920", "title": "The Grand National Assembly", "body": "In March 1920 the Allies formally occupy İstanbul and the Ottoman parliament is dissolved. Deputies gather in Ankara instead. On 23 April the Grand National Assembly opens and elects Mustafa Kemal its president. The Sultan’s government sentences him to death in absentia."}, "tr": {"key": "Meclis", "date": "23 Nisan 1920", "title": "Büyük Millet Meclisi", "body": "Mart 1920’de İtilaf devletleri İstanbul’u resmen işgal eder, Mebusan Meclisi dağıtılır. Mebuslar Ankara’da toplanır. 23 Nisan’da Büyük Millet Meclisi açılır ve Mustafa Kemal’i başkan seçer. Padişah hükümeti onu gıyabında idama mahkûm eder."}},
+ {"d1": "1920", "en": {"key": "Sèvres", "date": "10 August 1920", "title": "The Treaty of Sèvres", "body": "While the Greek army advances to Bursa, Uşak and Eastern Thrace, the Sultan’s government signs the Treaty of Sèvres. It carves up Anatolia: İzmir and Thrace to Greece, an Armenian state, an autonomous Kurdistan, French and Italian spheres. Ankara rejects it, and it is never ratified."}, "tr": {"key": "Sevr", "date": "10 Ağustos 1920", "title": "Sevr Antlaşması", "body": "Yunan ordusu Bursa, Uşak ve Doğu Trakya’ya ilerlerken padişah hükümeti Sevr Antlaşması’nı imzalar. Antlaşma Anadolu’yu paylaştırır: İzmir ve Trakya Yunanistan’a, doğuda bir Ermeni devleti ve özerk bir Kürdistan, Fransa ile İtalya’ya nüfuz bölgeleri. Ankara antlaşmayı reddeder; antlaşma hiçbir zaman onaylanmaz."}},
+ {"d1": "1920", "en": {"key": "East", "date": "September – December 1920", "title": "The eastern front", "body": "In the east, Kâzım Karabekir’s army advances against Armenia and retakes Sarıkamış and Kars. The Treaty of Gümrü is Ankara’s first international treaty. In 1921 the treaties of Moscow and Kars with the Soviets confirm the border, and Soviet arms and gold begin to arrive."}, "tr": {"key": "Doğu", "date": "Eylül – Aralık 1920", "title": "Doğu Cephesi", "body": "Doğuda Kâzım Karabekir’in ordusu Ermenistan’a karşı ilerler, Sarıkamış ve Kars’ı geri alır. Gümrü Antlaşması, Ankara’nın ilk uluslararası antlaşmasıdır. 1921’de Sovyetlerle imzalanan Moskova ve Kars antlaşmaları sınırı kesinleştirir; Sovyet silah ve altın yardımı gelmeye başlar."}},
+ {"d1": "1921", "en": {"key": "İnönü", "date": "January – April 1921", "title": "The battles of İnönü", "body": "In 1921 the Greek army advances from Bursa along the railway toward Eskişehir. Ankara’s new regular army, which has replaced the militias, is commanded by İsmet Pasha. It stops the advance twice at İnönü, the first victories of the Assembly’s own army."}, "tr": {"key": "İnönü", "date": "Ocak – Nisan 1921", "title": "İnönü Muharebeleri", "body": "1921’de Yunan ordusu Bursa’dan demiryolu boyunca Eskişehir’e doğru ilerler. Kuva-yi Milliye’nin yerini alan düzenli ordunun başında İsmet Paşa vardır. Ordu, Yunan ilerleyişini İnönü’de iki kez durdurur. Bunlar Meclis’in kendi ordusunun ilk zaferleridir."}, "yr": "1921"},
+ {"d1": "1921", "en": {"key": "Sakarya", "date": "23 August – 13 September 1921", "title": "The Battle of Sakarya", "body": "That summer the Greek army takes Kütahya and Eskişehir and pushes to within 50 kilometres of Ankara. Mustafa Kemal becomes commander-in-chief. For 22 days and nights the armies fight on the Sakarya River, and the advance is broken. France then makes peace and leaves Cilicia.", "quote": "There is no line of defence, only a surface of defence. That surface is the whole homeland.", "src": "Mustafa Kemal, 1921"}, "tr": {"key": "Sakarya", "date": "23 Ağustos – 13 Eylül 1921", "title": "Sakarya Meydan Muharebesi", "body": "O yaz Yunan ordusu Kütahya ve Eskişehir’i alır, Ankara’ya 50 kilometre kadar yaklaşır. Mustafa Kemal başkomutan olur. Ordular Sakarya boyunca 22 gün 22 gece savaşır ve Yunan ilerleyişi kırılır. Ardından Fransa barış yapar ve güneyden çekilir.", "quote": "Hatt-ı müdafaa yoktur, sath-ı müdafaa vardır. O satıh bütün vatandır.", "src": "Mustafa Kemal, 1921"}},
+ {"d1": "1922", "en": {"key": "Great Offensive", "date": "26 August – 8 September 1922", "title": "The Great Offensive", "body": "After a year of preparation, the Turkish army attacks at dawn on 26 August 1922 from the heights of Kocatepe. Within five days the Greek front collapses and its main force is encircled at Dumlupınar. The pursuit to the Aegean begins.", "quote": "Armies, your first objective is the Mediterranean. Forward!", "src": "Order of the day, 1 September 1922"}, "tr": {"key": "Büyük Taarruz", "date": "26 Ağustos – 8 Eylül 1922", "title": "Büyük Taarruz", "body": "Bir yıllık hazırlığın ardından Türk ordusu, 26 Ağustos 1922 sabahı Kocatepe’den taarruza geçer. Beş gün içinde Yunan cephesi çöker; ana kuvvetleri Dumlupınar’da kuşatılır. Ege’ye doğru takip başlar.", "quote": "Ordular, ilk hedefiniz Akdeniz’dir. İleri!", "src": "Günlük emir, 1 Eylül 1922"}, "yr": "1922"},
+ {"d1": "1922", "en": {"key": "İzmir", "date": "9 September – 11 October 1922", "title": "İzmir and Mudanya", "body": "On 9 September Turkish cavalry enters İzmir, fourteen days after the offensive began. Days later a great fire destroys much of the city. After a tense standoff with British troops at Çanakkale, the Armistice of Mudanya ends the fighting, and Eastern Thrace is handed back without a battle."}, "tr": {"key": "İzmir", "date": "9 Eylül – 11 Ekim 1922", "title": "İzmir ve Mudanya", "body": "9 Eylül’de Türk süvarileri, taarruzun başlamasından on dört gün sonra İzmir’e girer. Birkaç gün sonra büyük bir yangın şehrin büyük bölümünü yok eder. Çanakkale’de İngiliz birlikleriyle yaşanan gergin bekleyişin ardından Mudanya Mütarekesi savaşı sona erdirir; Doğu Trakya savaşılmadan geri alınır."}},
+ {"d1": "1923", "en": {"key": "Lausanne", "date": "24 July 1923", "title": "The Treaty of Lausanne", "body": "The Assembly abolishes the sultanate, and the last Sultan leaves İstanbul on a British warship. In July 1923 the Treaty of Lausanne replaces Sèvres and recognises the sovereignty and borders of the new state. Only Mosul is left open. A separate convention sets a compulsory exchange of populations with Greece."}, "tr": {"key": "Lozan", "date": "24 Temmuz 1923", "title": "Lozan Antlaşması", "body": "Meclis saltanatı kaldırır; son padişah bir İngiliz savaş gemisiyle İstanbul’dan ayrılır. Temmuz 1923’te Lozan Antlaşması Sevr’in yerini alır, yeni devletin egemenliğini ve sınırlarını tanır. Yalnızca Musul sorunu açık kalır. Ayrı bir sözleşme, Yunanistan’la zorunlu nüfus mübadelesini öngörür."}, "yr": "1923"},
+ {"d1": "1923", "en": {"key": "Republic", "date": "29 October 1923", "title": "The Republic of Türkiye", "body": "Ankara becomes the capital on 13 October 1923. Sixteen days later the Grand National Assembly proclaims the Republic and elects Mustafa Kemal, later named Atatürk, as its first president.", "quote": "Sovereignty belongs unconditionally to the nation.", "src": "Constitution of 1921, Article 1"}, "tr": {"key": "Cumhuriyet", "date": "29 Ekim 1923", "title": "Türkiye Cumhuriyeti", "body": "13 Ekim 1923’te Ankara başkent olur. On altı gün sonra Büyük Millet Meclisi Cumhuriyet’i ilan eder ve sonradan Atatürk soyadını alacak olan Mustafa Kemal’i ilk cumhurbaşkanı seçer.", "quote": "Egemenlik kayıtsız şartsız milletindir.", "src": "1921 Anayasası, 1. madde"}}
 ];
+const ADUR={"en": [22.1, 15.49, 20.14, 19.96, 19.64, 19.3, 18.65, 17.5, 23.54, 20.98, 18.83, 20.98, 16.74], "tr": [23.77, 15.28, 20.38, 20.9, 16.43, 22.15, 19.88, 20.48, 22.28, 17.32, 17.5, 21.97, 14.39]}; // narration lengths, seconds
 
 // running date, keyed to the scripted events of each chapter: [seconds into chapter, date]
 const DK=[[[0,'1918-10-30'],[2.2,'1918-10-30'],[3,'1918-11-13'],[4.6,'1918-12-21'],[6.2,'1919-03-28'],[8.4,'1919-05-13'],[9.8,'1919-05-15']],
@@ -655,9 +660,10 @@ const dateAt=(i,s)=>{const k=DK[i];if(s<=k[0][0])return k[0][1];for(let j=1;j<k.
 
 /* ───────────── labels ───────────── */
 const layer=$('#labels'),labels=[];
-function label(o){const el=document.createElement('div');el.className='lb '+o.cls;el.innerHTML=o.html;if(o.stem)el.style.setProperty('--stem',o.stem+'px');if(o.c)el.style.setProperty('--c',o.c);(o.hud?stage:layer).appendChild(el);o.el=el;o.p=o.p||P(o.lon,o.lat,o.lift==null?.3:o.lift);o.shown=false;labels.push(o);return o;}
-const ev=(lon,lat,kind,title,sub,a,b,stem=34,lift=.6)=>label({lon,lat,lift,cls:'ev '+kind,html:'<b>'+title+'</b>'+(sub?'<span>'+sub+'</span>':''),spans:[[a,b]],stem});
-const zl=(lon,lat,title,sub,c,a,b)=>label({lon,lat,lift:.4,cls:'zone',c,html:'<b>'+title+'</b>'+(sub?'<span>'+sub+'</span>':''),spans:[[a,b]]});
+const mk=o=>o.t==null?o.html:'<b>'+tt(o.t)+'</b>'+(o.s?'<span>'+tt(o.s)+'</span>':'')+(o.extra||'');
+function label(o){const el=document.createElement('div');el.className='lb '+o.cls;el.innerHTML=mk(o);if(o.stem)el.style.setProperty('--stem',o.stem+'px');if(o.c)el.style.setProperty('--c',o.c);(o.hud?stage:layer).appendChild(el);o.el=el;o.p=o.p||P(o.lon,o.lat,o.lift==null?.3:o.lift);o.shown=false;labels.push(o);return o;}
+const ev=(lon,lat,kind,title,sub,a,b,stem=34,lift=.6)=>label({lon,lat,lift,cls:'ev '+kind,t:title,s:sub,spans:[[a,b]],stem});
+const zl=(lon,lat,title,sub,c,a,b)=>label({lon,lat,lift:.4,cls:'zone',c,t:title,s:sub,spans:[[a,b]]});
 const vis=(sp,T)=>{let v=0;for(const s of sp){const q=Math.min(sstep(s[0],s[0]+.32,T),1-sstep(s[1]-.32,s[1],T));if(q>v)v=q;}return v;};
 
 const CITY={ist:['İSTANBUL',28.98,41.01,'t',1],ank:['ANKARA',32.86,39.93,'r',1],izm:['İZMİR',27.14,38.42,'l',1],sam:['SAMSUN',36.33,41.29,'r'],ama:['AMASYA',35.83,40.65,'l'],siv:['SİVAS',37.02,39.75,'b'],erz:['ERZURUM',41.27,39.90,'r'],
@@ -707,7 +713,7 @@ const SS=1.5,ship=buildShip(0x1c1e22,0xf1ead8,0xd3ab55,true);ship.scale.setScala
 const shipAhead=makeRibbon([[29.14,41.33],[30.2,41.62],[31.6,41.88],[33.0,42.3],[34.5,42.42],[35.4,42.3],[36.1,41.95],[36.44,41.43]],{w:.1,lift:.04,color:0xcfe2e6,dash:.4,n:300});
 const shipS=T=>eio((T-at(1,.8))/8.4), shipV=new THREE.Vector3(),shipV2=new THREE.Vector3();
 const smoke=[];for(let k=0;k<12;k++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:puffTex,color:0x2c2a28,transparent:true,depthWrite:false,fog:false}));s.renderOrder=8;scene.add(s);smoke.push(s);}
-const shipLbl=label({p:new THREE.Vector3(),cls:'ev',html:'<b>SS BANDIRMA</b><span>İstanbul to Samsun, 16 – 19 May 1919</span>',spans:[[at(1,.3),at(1,9)]],stem:36});
+const shipLbl=label({p:new THREE.Vector3(),cls:'ev',t:'SS BANDIRMA',s:'İstanbul to Samsun, 16 – 19 May 1919',spans:[[at(1,.3),at(1,9)]],stem:36});
 anim.push((T,now)=>{const v=tr(T,[at(0,10.2),0,at(0,11),1,at(2,2.6),1,at(2,3.6),0]);ship.visible=v>.01;smoke.forEach(s=>s.visible=ship.visible);
   shipPath.set(shipS(T),tr(T,[at(1,.8),0,at(1,1.6),.8,at(2,2.6),.8,at(2,4),0]));shipAhead.set(1,tr(T,[at(1,.2),0,at(1,1.2),.3,at(1,9.4),.3,at(1,11),0]));if(!ship.visible)return;
   const s=shipS(T);shipPath.at(s,shipV);shipPath.at(Math.min(1,s+.004),shipV2);const dx=shipV2.x-shipV.x,dz=shipV2.z-shipV.z;
@@ -820,9 +826,9 @@ arrow([[30.75,38.95],[31.4,39.0],[32.0,39.1],[32.4,39.24]],Object.assign({w:.75,
 flashes(sakLine,18,at(8,6.9),at(8,11),{size:1.5,jit:1.1,rate:2.3});
 ev(32.89,40.04,'','COMMANDER-IN-CHIEF','Mustafa Kemal, 5 August 1921',at(8,3.4),at(8,6.4),30,1.6);
 ev(32.89,40.04,'','GAZİ AND MARSHAL','title voted by the Assembly, 19 Sep 1921',at(8,11.4),at(8,13.4),30,1.6);
-const sakLbl=ev(31.95,39.9,'battle','BATTLE OF SAKARYA','23 Aug – 13 Sep 1921',at(8,6.6),at(8,13.2),64,1.2);sakLbl.dx=-120;sakLbl.el.insertAdjacentHTML('beforeend','<em id="dayN">DAY 1 OF 22</em>');
-const dayN=sakLbl.el.querySelector('#dayN');let dayShown=-1;
-anim.push(T=>{const d=clamp(Math.floor(lerp(1,23,(T-at(8,6.9))/4.1)),1,22);if(d!==dayShown){dayShown=d;dayN.textContent=T>at(8,11)?'22 DAYS · ADVANCE BROKEN':'DAY '+d+' OF 22';}});
+const sakLbl=ev(31.95,39.9,'battle','BATTLE OF SAKARYA','23 Aug – 13 Sep 1921',at(8,6.6),at(8,13.2),64,1.2);sakLbl.dx=-120;sakLbl.extra='<em></em>';sakLbl.el.innerHTML=mk(sakLbl);
+let dayTxt='';
+anim.push(T=>{const d=clamp(Math.floor(lerp(1,23,(T-at(8,6.9))/4.1)),1,22),x=T>at(8,11)?tt('22 DAYS · ADVANCE BROKEN'):LANG==='tr'?'22 GÜNÜN '+d+'. GÜNÜ':'DAY '+d+' OF 22';if(x!==dayTxt){dayTxt=x;const e=sakLbl.el.querySelector('em');if(e)e.textContent=x;}});
 arrow([[31.85,39.72],[31.5,39.66],[31.1,39.68],[30.75,39.74]],{w:.7,head:1.5,arc:.9},[at(8,10.5),0,at(8,12.4),1],[at(8,13),1,at(8,14.2),0]);
 arrow([[32.3,39.2],[31.9,39.1],[31.45,39.04],[31.0,39.02]],{w:.6,head:1.4,arc:.9},[at(8,10.7),0,at(8,12.5),1],[at(8,13),1,at(8,14.2),0]);
 ev(35.32,37.0,'treaty','ANKARA AGREEMENT','20 Oct 1921 · France leaves Cilicia',at(8,12.8),at(8,15.7),34,1);
@@ -872,13 +878,13 @@ zl(27.25,41.42,'EASTERN THRACE','returned without a battle','#e9bd62',at(10,12.2
 
 /* ═════════════ CHAPTER 10 · Lausanne ═════════════ */
 ev(32.89,40.04,'','SULTANATE ABOLISHED','Ankara, 1 November 1922',at(11,.7),at(11,4.2),30,1.2);
-label({hud:true,p:new THREE.Vector3(),cls:'ban',html:'<b>TREATY OF LAUSANNE</b><span>24 JULY 1923</span>',spans:[[at(11,4.2),at(11,12.2)]]});
+label({hud:true,p:new THREE.Vector3(),cls:'ban',t:'TREATY OF LAUSANNE',s:'24 JULY 1923',spans:[[at(11,4.2),at(11,12.2)]]});
 ev(28.98,41.01,'treaty','LAST ALLIED TROOPS LEAVE','İstanbul, 2 October 1923',at(11,8),at(11,12.2),40,1);
 
 /* ═════════════ CHAPTER 11 · Republic ═════════════ */
 pulse(32.86,39.93,0xffd27a,at(12,1),at(12,1.2),78,5);pulse(32.86,39.93,0xffd27a,at(12,1.2),at(12,6),9,1.7);
 ev(32.89,40.04,'','REPUBLIC PROCLAIMED','Ankara, 29 October 1923',at(12,1.4),END+60,24,2.1).dxf=()=>lerp(-100,112,wideNow);
-label({hud:true,p:new THREE.Vector3(),cls:'ban',html:'<b>TÜRKİYE CUMHURİYETİ</b><span>29 OCTOBER 1923</span>',spans:[[at(12,4.5),END+60]]});
+label({hud:true,p:new THREE.Vector3(),cls:'ban',t:'TÜRKİYE CUMHURİYETİ',s:'29 OCTOBER 1923',spans:[[at(12,4.5),END+60]]});
 ['ist','edi','bur','kon','aty','ada','sam','siv','tra','erz','kars','van','diy','urf','kas','kay','esk','afy'].forEach(k=>{const c=CITY[k],f=new Flag(1.0,.67,2.2);f.g.position.copy(P(c[1],c[2],.05));f.g.position.x+=.3;f.g.traverse(q=>{q.castShadow=false;});scene.add(f.g);
   const t0=at(12,1.6)+Math.hypot(X(c[1])-X(32.86),Z(c[2])-Z(39.93))*.05;anim.push((T,now)=>{const v=sstep(t0,t0+.9,T);f.g.visible=v>.01;if(!f.g.visible)return;f.g.scale.setScalar(back(v)*(assembly.userData.fk||1));f.set(now,sstep(t0+.3,t0+1.6,T));});});
 
@@ -919,9 +925,9 @@ function camAt(T){let i=0;while(i<CK.length-2&&T>CK[i+1][0])i++;const a=CK[i],b=
   {const ox=narrowUI?Math.round(SHt*lerp(.17,.1,wide)):Math.round(SW*lerp(.06,.1,wide));if(ox!==lastOx){lastOx=ox;narrowUI?camera.setViewOffset(SW,SHt,0,ox,SW,SHt):camera.setViewOffset(SW,SHt,-ox,SHt*.035,SW,SHt);camera.updateProjectionMatrix();}}northEl.setAttribute('transform','rotate('+(pose[3]+user.az).toFixed(1)+' 20 20)');}
 
 /* ───────────── HUD ───────────── */
-const segs=$('#segs'),segEls=CH.map((c,i)=>{const b=document.createElement('button');b.className='seg';b.setAttribute('aria-label','Chapter '+(i+1)+': '+c.title);
-  b.innerHTML=(c.yr?'<span class="yr">'+c.yr+'</span>':'')+'<span class="bar"><i></i></span><span class="nm">'+c.key+'</span>';b.addEventListener('click',()=>{seek(C[i]+.01);setPlaying(true);});segs.appendChild(b);return b;});
-const MON=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+const segs=$('#segs'),segEls=CH.map((c,i)=>{const b=document.createElement('button');b.className='seg';
+  b.innerHTML=(c.yr?'<span class="yr">'+c.yr+'</span>':'')+'<span class="bar"><i></i></span><span class="nm"></span>';b.addEventListener('click',()=>{seek(C[i]+.01);setPlaying(true);});segs.appendChild(b);return b;});
+const MONS={en:['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],tr:['OCA','ŞUB','MAR','NİS','MAY','HAZ','TEM','AĞU','EYL','EKİ','KAS','ARA']};
 let curCh=-1,lastClock='';
 const ARW=c=>'<svg viewBox="0 0 28 12"><path d="M0 4.5h18V1l10 5-10 5V7.5H0z" fill="'+c+'"/></svg>',SWT=(c,solid)=>'<i class="sw'+(solid?' solid':'')+'" style="--c:'+c+'"></i>';
 const LG={tr:[ARW('#e4352b'),'Turkish national forces'],gr:[ARW('#4f8fdc'),'Greek army'],
@@ -940,13 +946,13 @@ const LG={tr:[ARW('#e4352b'),'Turkish national forces'],gr:[ARW('#4f8fdc'),'Gree
  sg:[SWT('#467dc8',1),'Greece'],ss:[SWT('#9669b9',1),'Straits zone'],si:[SWT('#64a055',1),'Italian sphere'],sf:[SWT('#37a096',1),'French sphere'],sa:[SWT('#d78c3c',1),'Armenia'],sk:[SWT('#cdb84a',1),'Kurdistan'],
  bd:['<svg viewBox="0 0 28 12"><path d="M0 6h28" stroke="#ffc85e" stroke-width="3.4"/></svg>','Borders recognised at Lausanne']};
 const LGC=[['zb','zf','zi','zg','rw'],['sr'],['rt','bc','rw'],['zf','ft','ml','bc'],['dp','bc','rw'],[[0,['gr','zg','zb']],[4.4,['sg','ss','si','sf','sa','sk']]],['tr','ut','ft'],['tr','gr','un','fl','zg','rw'],['tr','gr','un','fl','zg','rw'],[[0,['tr','un','zg','rw']],[5.5,['tr','un','zg','ff','rw']]],[[0,['tr','rw']],[8,['zg','zb','rw']]],['bd'],['bd']];
-let lgKey='';function legend(i,s){let k=LGC[i];if(Array.isArray(k[0])){let q=k[0][1];for(const e of k)if(s>=e[0])q=e[1];k=q;}const id=k.join();if(id===lgKey)return;lgKey=id;$('#legend').innerHTML=k.map(x=>'<span>'+LG[x][0]+LG[x][1]+'</span>').join('');}
-function hud(T){let i=0;while(i<NC-1&&T>=C[i+1])i++;const c=CH[i],u=clamp((T-C[i])/D[i]);
-  if(i!==curCh){curCh=i;$('#cNo').textContent='CHAPTER '+(i+1)+' OF '+NC;$('#cKey').textContent=c.key.toUpperCase().replace('İZMIR','İZMİR')+' · '+c.d1.slice(0,4);
+let lgKey='';function legend(i,s){let k=LGC[i];if(Array.isArray(k[0])){let q=k[0][1];for(const e of k)if(s>=e[0])q=e[1];k=q;}const id=LANG+k.join();if(id===lgKey)return;lgKey=id;$('#legend').innerHTML=k.map(x=>'<span>'+LG[x][0]+tt(LG[x][1])+'</span>').join('');}
+function hud(T){let i=0;while(i<NC-1&&T>=C[i+1])i++;const c=CH[i][LANG],u=clamp((T-C[i])/D[i]);
+  if(i!==curCh){curCh=i;$('#cNo').textContent=LANG==='tr'?'BÖLÜM '+(i+1)+' / '+NC:'CHAPTER '+(i+1)+' OF '+NC;$('#cKey').textContent=(LANG==='tr'?c.key.toLocaleUpperCase('tr'):c.key.toUpperCase().replace('İZMIR','İZMİR'))+' · '+CH[i].d1;
     hudBoxes.due=2;$('#cBody').innerHTML='<div class="in"><div class="date">'+c.date+'</div><h2>'+c.title+'</h2><p>'+c.body+'</p>'+(c.quote?'<blockquote>“'+c.quote+'”<cite>'+c.src+'</cite></blockquote>':'')+'</div>';
     segEls.forEach((s,k)=>{s.classList.toggle('on',k===i);s.classList.toggle('done',k<i);if(k>i)s.querySelector('i').style.width='0';if(k<i)s.querySelector('i').style.width='';});}
   legend(i,T-C[i]);segEls[i].querySelector('i').style.width=(u*100).toFixed(1)+'%';
-  const d=new Date(dateAt(i,T-C[i])),s=d.getUTCDate()+' '+MON[d.getUTCMonth()]+' <i>'+d.getUTCFullYear()+'</i>';if(s!==lastClock){lastClock=s;$('#clock').innerHTML=s;}}
+  const d=new Date(dateAt(i,T-C[i])),s=d.getUTCDate()+' '+MONS[LANG][d.getUTCMonth()]+' <i>'+d.getUTCFullYear()+'</i>';if(s!==lastClock){lastClock=s;$('#clock').innerHTML=s;}}
 
 const v3=new THREE.Vector3();let SW=1,SHt=1,railPad=120;
 const hudRects=[];
@@ -967,14 +973,14 @@ function placeLabels(T){const taken=hudRects.slice();
 function hudBoxes(){hudRects.length=0;const s0=stage.getBoundingClientRect();for(const q of ['.mast','.clock','#card']){const e=$(q);if(!e)continue;const r=e.getBoundingClientRect();let b=[r.left-s0.left,r.top-s0.top,r.right-s0.left,r.bottom-s0.top];if(q==='.clock')b=[b[2]-330,b[1],b[2],b[1]+128];if(q==='.mast')b=[b[0],b[1],b[0]+Math.min(470,r.width),b[1]+84];hudRects.push(b);}}
 function measure(){for(const o of labels){o.w=o.el.offsetWidth;o.h=o.el.offsetHeight;}hudBoxes();}
 function resize(){SW=stage.clientWidth;SHt=stage.clientHeight;renderer.setSize(SW,SHt,false);camera.aspect=SW/SHt;
-  const narrow=SW<820;narrowUI=narrow;lastOx=-1;railPad=narrow?70:122;camera.setViewOffset(SW,SHt,narrow?0:-SW*.06,narrow?SHt*.17:SHt*.035,SW,SHt);camera.updateProjectionMatrix();measure();}
+  const narrow=SW<820;narrowUI=narrow;lastOx=-1;railPad=narrow?104:122;camera.setViewOffset(SW,SHt,narrow?0:-SW*.06,narrow?SHt*.17:SHt*.035,SW,SHt);camera.updateProjectionMatrix();measure();}
 window.addEventListener('resize',resize);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measure);
 
 /* ───────────── playback ───────────── */
 let T=0,playing=!window.matchMedia('(prefers-reduced-motion: reduce)').matches,last=performance.now(),now=0;
 const PLAY='M3 2l11 6-11 6z',PAUSE='M3 2h4v12H3zM9 2h4v12H9z',REPLAY='M8 2a6 6 0 1 0 6 6h-2a4 4 0 1 1-4-4v3l5-4-5-4z';
-function setPlaying(p){playing=p;$('#iPlay').setAttribute('d',p?PAUSE:(T>=END-.01?REPLAY:PLAY));$('#bPlay').setAttribute('aria-label',p?'Pause':(T>=END-.01?'Replay':'Play'));}
-function seek(t){T=clamp(t,0,END);}
+function setPlaying(p){playing=p;$('#iPlay').setAttribute('d',p?PAUSE:(T>=END-.01?REPLAY:PLAY));$('#bPlay').setAttribute('aria-label',tt(p?'Pause':(T>=END-.01?'Replay':'Play')));}
+function seek(t){T=clamp(t,0,END);narSeek=true;}
 const chNow=()=>{let i=0;while(i<NC-1&&T>=C[i+1])i++;return i;};
 $('#bPlay').addEventListener('click',()=>{if(!playing&&T>=END-.01)T=0;setPlaying(!playing);});
 $('#bPrev').addEventListener('click',()=>{const i=chNow();seek(C[T-C[i]>2?i:Math.max(0,i-1)]+.01);});
@@ -987,10 +993,61 @@ canvas.addEventListener('wheel',e=>{e.preventDefault();user.zoom=clamp(user.zoom
 canvas.addEventListener('dblclick',()=>{user.az=user.el=0;user.zoom=1;});
 
 function frame(T,now){if(hudBoxes.due&&!--hudBoxes.due)hudBoxes();tracks(T,now);for(const f of anim)f(T,now);camAt(T);camera.updateMatrixWorld();hud(T);placeLabels(T);renderer.render(scene,camera);}
-function loop(t){requestAnimationFrame(loop);if(window.__manual)return;const dt=Math.min(.1,(t-last)/1000);last=t;now+=dt;if(playing){T+=dt;if(T>=END){T=END;setPlaying(false);}}frame(T,now);}
-resize();setPlaying(playing);frame(0,0);
+/* language */
+function applyLang(first){document.documentElement.lang=LANG;document.title=tt('Turkish War of Independence');
+  $('#hK').textContent=tt('KURTULUŞ SAVAŞI · 1919 – 1923');$('#hT').textContent=tt('The Turkish War of Independence');$('#hD').textContent=tt('DATE ON THE MAP');$('#hH').textContent=tt('DRAG TO ORBIT · SCROLL TO ZOOM');$('#hN').textContent=tt('N');
+  $('#bPrev').setAttribute('aria-label',tt('Previous chapter'));$('#bNext').setAttribute('aria-label',tt('Next chapter'));$('#bSound').setAttribute('aria-label',tt(soundOn?'Turn sound off':'Turn sound on'));
+  $('#legend').setAttribute('aria-label',tt('Map legend'));$('.rail').setAttribute('aria-label',tt('Chapters'));$('.ctl .lang').setAttribute('aria-label',tt('Language'));
+  $('#lEn').classList.toggle('on',LANG==='en');$('#lTr').classList.toggle('on',LANG==='tr');$('#lEn').setAttribute('aria-pressed',LANG==='en');$('#lTr').setAttribute('aria-pressed',LANG==='tr');
+  segEls.forEach((b,i)=>{const c=CH[i][LANG];b.querySelector('.nm').textContent=c.key;b.setAttribute('aria-label',tt('Chapter')+' '+(i+1)+': '+c.title);});
+  for(const o of labels)if(o.t!=null)o.el.innerHTML=mk(o);dayTxt='';curCh=-1;lgKey='';lastClock='';setPlaying(playing);
+  if(!first){tex.userData.letter();narKey='';measure();frame(T,now);}}
+function setLang(l){if(l===LANG)return;LANG=l;try{localStorage.setItem('twi-lang',l);}catch(e){}applyLang(false);}
+$('#lEn').addEventListener('click',()=>setLang('en'));$('#lTr').addEventListener('click',()=>setLang('tr'));
+
+/* sound: narration files plus a quiet synthesised bed (drone, wind, distant guns) */
+let soundOn=false,actx=null,amb=null,narKey='',narReady=false,narSeek=true,nextThump=0,hornDone=false,chordDone=false;
+const nar=new Audio();nar.preload='auto';const narUrl={};
+const wallLen=i=>soundOn?Math.max(D[i],ADUR[LANG][i]+2):D[i];
+const narName=i=>LANG+'-'+String(i).padStart(2,'0');
+function narLoad(k){if(narUrl[k])return Promise.resolve(narUrl[k]);return fetch('audio/'+k+'.mp3').then(r=>{if(!r.ok)throw 0;return r.blob();}).then(b=>narUrl[k]=URL.createObjectURL(b)).catch(()=>narUrl[k]='audio/'+k+'.mp3');}
+function ambInit(){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;actx=new AC();const m=actx.createGain();m.gain.value=0;m.connect(actx.destination);
+  const lp=actx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=380;lp.connect(m);const dg=actx.createGain();dg.gain.value=.05;dg.connect(lp);
+  [[73.42,'sawtooth',.45],[110,'triangle',.5],[146.83,'sine',.32],[220.4,'sine',.1]].forEach(q=>{const o=actx.createOscillator(),g=actx.createGain();o.type=q[1];o.frequency.value=q[0];o.detune.value=(Math.random()-.5)*12;g.gain.value=q[2];o.connect(g);g.connect(dg);o.start();});
+  const lfo=actx.createOscillator(),lg=actx.createGain();lfo.frequency.value=.06;lg.gain.value=.018;lfo.connect(lg);lg.connect(dg.gain);lfo.start();
+  const nb=actx.createBuffer(1,actx.sampleRate*2,actx.sampleRate),ch=nb.getChannelData(0);for(let i=0;i<ch.length;i++)ch[i]=Math.random()*2-1;
+  const ns=actx.createBufferSource();ns.buffer=nb;ns.loop=true;const bp=actx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=480;bp.Q.value=.5;const wg=actx.createGain();wg.gain.value=.011;ns.connect(bp);bp.connect(wg);wg.connect(m);ns.start();
+  const wl=actx.createOscillator(),wlg=actx.createGain();wl.frequency.value=.09;wlg.gain.value=200;wl.connect(wlg);wlg.connect(bp.frequency);wl.start();
+  amb={m,nb};}
+function thump(v){const t=actx.currentTime,src=actx.createBufferSource();src.buffer=amb.nb;src.playbackRate.value=.45+Math.random()*.3;const f=actx.createBiquadFilter();f.type='lowpass';f.frequency.value=80+Math.random()*90;
+  const g=actx.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+.015);g.gain.exponentialRampToValueAtTime(.0006,t+.8+Math.random()*.9);src.connect(f);f.connect(g);g.connect(amb.m);src.start(t,Math.random());src.stop(t+2.2);}
+function tone(freqs,type,peak,attack,hold,release,cut){const t=actx.currentTime,f=actx.createBiquadFilter();f.type='lowpass';f.frequency.value=cut;const g=actx.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(peak,t+attack);g.gain.setValueAtTime(peak,t+attack+hold);g.gain.exponentialRampToValueAtTime(.0005,t+attack+hold+release);f.connect(g);g.connect(amb.m);
+  freqs.forEach(q=>{const o=actx.createOscillator();o.type=type;o.frequency.value=q;o.connect(f);o.start(t);o.stop(t+attack+hold+release+.1);});}
+function sound(dt){
+  if(amb)amb.m.gain.setTargetAtTime(soundOn&&playing?1:0,actx.currentTime,.35);
+  if(!soundOn||!playing||T>=END){if(!nar.paused)nar.pause();return;}
+  const i=chNow(),k=narName(i),pos=(T-C[i])/D[i]*wallLen(i)-.7;
+  if(amb){let b=false;for(const w of BATTLE)if(T>w[0]&&T<w[1]){b=true;break;}
+    if(b&&actx.currentTime>nextThump){thump(.22+Math.random()*.3);nextThump=actx.currentTime+.3+Math.random()*1.2;}
+    if(T<at(1,.8))hornDone=false;else if(!hornDone&&T<at(1,2.5)){hornDone=true;tone([98,147.2],'sawtooth',.07,.12,1.3,.7,520);}
+    if(T<at(12,1.2))chordDone=false;else if(!chordDone&&T<at(12,4)){chordDone=true;tone([146.83,185,220,293.66,440],'triangle',.045,2.2,3.5,6,1400);}}
+  if(k!==narKey){narKey=k;narReady=false;nar.pause();narLoad(k).then(u=>{if(narKey!==k)return;nar.src=u;narReady=true;narSeek=true;});if(i<NC-1)narLoad(narName(i+1));return;}
+  if(!narReady)return;
+  if(pos<0||pos>=ADUR[LANG][i]-.05){if(!nar.paused)nar.pause();narSeek=true;return;}
+  if(narSeek||Math.abs(nar.currentTime-pos)>.8){try{nar.currentTime=pos;}catch(e){}narSeek=false;}
+  if(nar.paused&&!nar.ended)nar.play().catch(()=>{});}
+function setSound(on){soundOn=on;const b=$('#bSound');b.classList.remove('invite');b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);b.setAttribute('aria-label',tt(on?'Turn sound off':'Turn sound on'));
+  $('#iSnd').setAttribute('d',on?'M10.8 5.4q1.9 2.6 0 5.2M12.9 3.6q3.3 4.4 0 8.8':'M10.6 5.6l4 4.8M14.6 5.6l-4 4.8');
+  if(on){if(!actx)ambInit();if(actx&&actx.state==='suspended')actx.resume();narKey='';narSeek=true;if(T>=END-.01)T=0;else seek(C[chNow()]+.01);if(!playing)setPlaying(true);}else nar.pause();}
+$('#bSound').addEventListener('click',()=>setSound(!soundOn));
+
+function loop(t){requestAnimationFrame(loop);if(window.__manual)return;const dt=Math.min(.1,(t-last)/1000);last=t;now+=dt;if(playing){const ci=chNow();let adv=true;
+  // while narration is playing it is the clock, so slow frames cannot pull the voice and the picture apart
+  if(soundOn&&narReady&&!narSeek&&narKey===narName(ci)&&!nar.paused){const Tn=C[ci]+(nar.currentTime+.7)/wallLen(ci)*D[ci];T=clamp(Tn,C[ci],C[ci+1]-.001);adv=false;}
+  if(adv)T+=dt*D[ci]/wallLen(ci);if(T>=END){T=END;setPlaying(false);}}sound(dt);frame(T,now);}
+resize();applyLang(true);measure();frame(0,0);
 $('#load').classList.add('off');
-window.__seek=(t,n)=>{T=clamp(t,0,END);setPlaying(false);now=n==null?t:n;frame(T,now);return curCh;};
+window.__lang=setLang;window.__seek=(t,n)=>{T=clamp(t,0,END);setPlaying(false);now=n==null?t:n;frame(T,now);return curCh;};
 window.__ready=true;
 requestAnimationFrame(t=>{last=t;requestAnimationFrame(loop);});
 }
