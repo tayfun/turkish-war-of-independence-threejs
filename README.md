@@ -50,7 +50,7 @@ Then open <http://localhost:8000/>.
 - **Railways** are drawn by hand through the real stations of the lines that existed in 1920, so the route between stations is approximate.
 - **Occupation zones, front lines and the Sèvres partition** are approximate shapes drawn for clarity.
 - **Borders:** the border lit at the end is the one recognised at Lausanne, so Hatay (which joined in 1939) is left outside it. Neighbouring countries are shown with their modern outlines.
-- **Narration** (`audio/en-NN.mp3`, `audio/tr-NN.mp3`, one file per chapter and language) was generated with ElevenLabs text-to-speech from the chapter text. The score (drums, ostinato and pads that change with each chapter's mood) is synthesised in the browser with the Web Audio API.
+- **Narration** (`audio/en-NN.mp3`, `audio/tr-NN.mp3`, one file per chapter and language) was generated with ElevenLabs text-to-speech (Eleven v4 Turbo) from the chapter text, with a delivery direction per chapter. Pauses at full stops and before quotations were then set from the returned word timings. The score (drums, bass and pads that change with each chapter's mood) is synthesised in the browser with the Web Audio API.
 
 Map data: Natural Earth (public domain), © OpenStreetMap contributors (ODbL), Mapzen Terrain Tiles.
 
