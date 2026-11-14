@@ -20,7 +20,7 @@ It plays through 13 chapters in about 2 minutes 50 seconds:
 
 It runs in English or Turkish. The language follows the browser, and the EN / TR switch on the control bar changes it at any time (the choice is remembered). Add `#tr` or `#en` to the address to link straight to one language.
 
-Turn on sound with the speaker button to hear each chapter narrated in the chosen language over a score that changes with the chapter. With sound on, each chapter slows down to the length of its narration, so the whole piece runs about five minutes.
+Turn on sound with the speaker button to hear each chapter narrated in the chosen language over a score that changes with the chapter. With sound on, each chapter slows down to the length of its narration, so the whole piece runs about five minutes. When the story ends, a hopeful closing theme plays on a loop until you turn the sound off or press replay.
 
 ## Run it
 
