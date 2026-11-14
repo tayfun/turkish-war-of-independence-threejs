@@ -20,7 +20,7 @@ It plays through 13 chapters in about 2 minutes 50 seconds:
 
 It runs in English or Turkish. The language follows the browser, and the EN / TR switch on the control bar changes it at any time (the choice is remembered). Add `#tr` or `#en` to the address to link straight to one language.
 
-Turn on sound with the speaker button to hear each chapter narrated in the chosen language over a quiet ambient bed. With sound on, each chapter slows down to the length of its narration, so the whole piece runs about five minutes.
+Turn on sound with the speaker button to hear each chapter narrated in the chosen language over a score that changes with the chapter. With sound on, each chapter slows down to the length of its narration, so the whole piece runs about five minutes.
 
 ## Run it
 
@@ -42,13 +42,18 @@ Then open <http://localhost:8000/>.
 
 ## How it is built
 
-- The coastlines and borders come from Natural Earth (via the `world-atlas` package), embedded in the page as compact JSON.
-- The terrain is stylised, not surveyed: elevation is generated from a hand-placed model of the main ranges plus noise, so mountains are in the right places but individual valleys are not real.
-- Occupation zones, front lines and the Sèvres partition are approximate shapes drawn for clarity.
-- The narration (`audio/en-NN.mp3`, `audio/tr-NN.mp3`, one file per chapter and language) was generated with ElevenLabs text-to-speech from the chapter text. The ambient bed (drone, wind, distant guns) is synthesised in the browser with the Web Audio API.
-- The border lit at the end is the one recognised at Lausanne, so Hatay (which joined in 1939) is left outside it.
+- **Coastlines and borders:** Natural Earth 1:50m (via the `world-atlas` package), embedded in the page.
+- **Relief:** real elevation from the Mapzen / AWS Terrain Tiles (SRTM-derived), resampled to a 720 × 379 grid and embedded as a small PNG. Heights are exaggerated about elevenfold so the relief reads at map scale.
+- **Lakes:** real outlines. Tuz, Van, Urmia, Sevan, Beyşehir and Eğirdir come from Natural Earth 1:10m; İznik, Uluabat, Sapanca, Burdur, Acıgöl, Eber, Hazar and Çıldır come from OpenStreetMap. The big reservoirs (Keban, Atatürk, Assad) are left out because they did not exist in 1923.
+- **Rivers:** Natural Earth 1:10m, with the Sakarya, Porsuk, Yeşilırmak, Gediz, Seyhan and Çoruh from OpenStreetMap.
+- **Places:** every town on the map was checked against the GeoNames gazetteer and sits within 3 km of its listed position.
+- **Railways** are drawn by hand through the real stations of the lines that existed in 1920, so the route between stations is approximate.
+- **Occupation zones, front lines and the Sèvres partition** are approximate shapes drawn for clarity.
+- **Borders:** the border lit at the end is the one recognised at Lausanne, so Hatay (which joined in 1939) is left outside it. Neighbouring countries are shown with their modern outlines.
+- **Narration** (`audio/en-NN.mp3`, `audio/tr-NN.mp3`, one file per chapter and language) was generated with ElevenLabs text-to-speech from the chapter text. The score (drums, ostinato and pads that change with each chapter's mood) is synthesised in the browser with the Web Audio API.
+
+Map data: Natural Earth (public domain), © OpenStreetMap contributors (ODbL), Mapzen Terrain Tiles.
 
 ## Known limits
 
-- Close-up terrain is soft at the lowest camera angles.
 - The phone layout works, but the widest shots crop the far west and east.
