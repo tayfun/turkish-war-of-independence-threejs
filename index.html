@@ -753,15 +753,6 @@ function buildMosque(){const g=new THREE.Group(),A=new Batch(),wall=MS(0xffffff,
   A.add(CYL(.04,.045,.045,8),pale,0,.052,.62).add(hd(.045),lead,0,.075,.62);
   A.build(g);return g;}
 
-/* The wooden landing stage at Samsun */
-function buildJetty(){const g=new THREE.Group(),A=new Batch(),wood=MS(0xffffff,.9,0,{map:planks}),post=MS(0x4a3a2a,.9),boat=MS(0x7a5a3c,.8);
-  A.box(wood,1.5,.03,.2,.75,.12,0);
-  for(let i=0;i<7;i++){[-.08,.08].forEach(z=>A.add(CYL(.014,.016,.22,5),post,.12+i*.22,.03,z));if(i<6)[-.08,.08].forEach(z=>A.box(post,.23,.012,.012,.23+i*.22,.05,z,0,0,i%2?.35:-.35));A.box(post,.014,.014,.2,.12+i*.22,.095,0);}
-  [.09,-.09].forEach(z=>{A.box(post,.02,.1,.02,1.48,.18,z).box(post,.02,.1,.02,1.0,.18,z).box(post,.5,.012,.012,1.24,.22,z);});
-  for(let i=0;i<3;i++)A.box(wood,.09,.02,.14,1.56+i*.07,.1-i*.035,0);A.add(CYL(.008,.01,.3,5),post,1.44,.28,0).add(CYL(.018,.014,.04,6),MS(0xe8dca8,.5),1.44,.45,0).add(new THREE.ConeGeometry(.026,.03,6),post,1.44,.485,0);
-  const hull=new THREE.SphereGeometry(.5,10,6,0,Math.PI*2,Math.PI/2,Math.PI/2);A.add(hull,boat,1.15,.07,.4,.2,0,0,.36,.12,.14).box(MS(0x9b7a55,.9),.2,.008,.1,1.15,.065,.4,.2).box(post,.3,.008,.01,1.15,.085,.4,1.2);
-  A.build(g);return g;}
-
 /* Units: a block of infantry behind its standard, or a troop of horsemen (cavalry and mounted militia) */
 const greekFlag=ctex(96,64,x=>{x.fillStyle='#1f5aa8';x.fillRect(0,0,96,64);x.fillStyle='#fff';x.fillRect(40,0,16,64);x.fillRect(0,24,96,16);},1,1);
 function buildUnit(kind){const g=new THREE.Group(),A=new Batch(),tr=kind!=='gr',cloth=MS(tr?0x8b7a50:0x66788a,.9),head=MS(tr?0x2a2420:0x4a5560,.8),base=MS(tr?0x9c1c16:0x1f4f96,.7),skin=MS(0xc79a78,.8),gun=MS(0x2c2622,.6),horse=MS(0x4a3526,.85),pole=MS(0x3a2c20,.8);
@@ -902,9 +893,9 @@ ev(28.98,41.01,'foe','İSTANBUL OCCUPIED','16 March 1920 · parliament closed',a
 pulse(28.98,41.01,0xa678c6,at(4,.4),at(4,2.6),6,1.4);
 const assembly=buildAssembly();
 assembly.position.copy(P(32.86,39.93,0));assembly.position.z-=.9;assembly.position.x+=.2;assembly.position.y=hAt(assembly.position.x,assembly.position.z)-.02;scene.add(assembly);
-// landmarks that stood throughout: İzmir's clock tower, an İstanbul mosque and the Samsun landing stage
+// landmarks that stood throughout: İzmir's clock tower and an İstanbul mosque
 const LM=[];{const add=(m,lon,lat,dx,dz,s,ry)=>{m.position.copy(P(lon,lat,.02));m.position.x+=dx;m.position.z+=dz;m.rotation.y=ry||0;m.userData.s=s;scene.add(m);LM.push(m);};
- add(buildClockTower(),27.14,38.42,-.05,1.25,1.5);{const ct=LM[LM.length-1];ct.userData.sx=.78;}add(buildMosque(),28.98,41.01,-1.7,-.75,1.2,.5);LM[LM.length-1].position.y+=.14;const j=buildJetty();j.position.set(X(36.345),0,Z(41.255));j.rotation.y=Math.PI/2-.35;j.userData.s=2;j.userData.fix=true;scene.add(j);LM.push(j);}
+ add(buildClockTower(),27.14,38.42,-.05,1.25,1.5);{const ct=LM[LM.length-1];ct.userData.sx=.78;}add(buildMosque(),28.98,41.01,-1.7,-.75,1.2,.5);LM[LM.length-1].position.y+=.14;}
 const ankFlag=new Flag(.78,.52,1.15);ankFlag.g.position.set(0,1.88,0);ankFlag.g.children[0].scale.set(.5,1,.5);assembly.add(ankFlag.g);
 anim.push((T,now)=>{const v=tr(T,[at(4,4.2),0,at(4,5.8),1]);assembly.visible=v>.005;if(!assembly.visible)return;const ak=(assembly.userData.k||1)*tr(T,[at(4,11.2),1,at(5,1),.62]);assembly.scale.set(ak,ak*Math.max(.001,back(v)),ak);ankFlag.set(now,tr(T,[at(4,5.6),0,at(4,7.6),1]));assembly.userData.people.visible=T>at(4,5.6)&&T<at(4,12);});
 ev(32.89,40.04,'','GRAND NATIONAL ASSEMBLY','Ankara, 23 April 1920',at(4,5.8),at(4,12.2),24,2.1).dx=-100;
